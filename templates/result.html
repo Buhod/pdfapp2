@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados del Convertidor de PDF</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: hsl(210, 50%, 20%); /* Cambiar a fondo azul */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+            color: #0C356A; /* Cambiar color del título a azul */
+        }
+
+        #result {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        #result h2 {
+            margin-bottom: 10px;
+            color: #0C356A; /* Mantener el color del título en azul */
+        }
+
+        #result p {
+            margin-bottom: 5px;
+            color: #0C356A; /* Mantener el color del texto en azul */
+        }
+
+        #result ul {
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #result li {
+            margin-bottom: 10px; /* Aumentar el espacio entre los elementos de la lista */
+        }
+
+        .download-button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resultados del Separador de PDF</h1>
+        <div id="result">
+            <h2>Resultados:</h2>
+            <p>Archivo Separado: <a href="{{ pdf_path }}" download>{{ pdf_filename }}</a></p>
+            <p>Hoja(s) separada(s):</p>
+            <ul>
+                {% for file_path in separated_files %}
+                    <li>
+                        <a href="{{ url_for('download', filename=os.path.basename(file_path)) }}" download>
+                            {{ os.path.basename(file_path) }}
+                        </a>
+                        <a class="download-button" href="{{ url_for('download', filename=os.path.basename(file_path)) }}" download>
+                            Descargar
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
