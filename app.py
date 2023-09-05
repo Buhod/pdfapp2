@@ -107,5 +107,4 @@ def generate_random_string(length=8):
     letters = string.ascii_letters
     return ''.join(random.choice(letters) for _ in range(length))
 
-if __name__ == '__main__':
-    app.run(debug=False)
+app.run(host='0.0.0.0', debug=False)
